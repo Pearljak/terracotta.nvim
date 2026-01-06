@@ -1,12 +1,12 @@
 <div align="center">
-      <h1> <img src="blank" width="80px"><br/>terracotta.nvim</h1>
+      <h1> <img src="https://github.com/user-attachments/assets/aff692d3-04a0-4215-aa62-48ebcd7a3d8c" width="80px"><br/>terracotta.nvim</h1>
      </div>
-<p align="center">
-<a href="#"><img alt="Made with Lua" src="https://img.shields.io/badge/Made%20with%20Lua-blueviolet.svg?=for-the-badge&logo=lua" style="vertical-align:center" /></a>
+
 </p>
-
-
 Terracotta is a type of clay material that is brownish‑red or reddish‑orange in color and is made by firing clay at a relatively low temperature, crafted to feel intuitive and comfortable for your eyes.
+
+<img width="1918" height="1060" alt="image" src="https://github.com/user-attachments/assets/8fe7dfd5-7810-491d-92c0-d0b013c95bf3" />
+
 ## Features
 
 - Full Treesitter support
