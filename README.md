@@ -4,15 +4,9 @@
 
 </p>
 Terracotta is a type of clay material that is brownish‑red or reddish‑orange in color and is made by firing clay at a relatively low temperature, crafted to feel intuitive and comfortable for your eyes.
-<<<<<<< HEAD
 
 <img width="1918" height="1060" alt="image" src="https://github.com/user-attachments/assets/8fe7dfd5-7810-491d-92c0-d0b013c95bf3" />
 
-## Features
-=======
->>>>>>> fdcb2cb (border_style)
-
-<img width="1918" height="1060" alt="image" src="https://github.com/user-attachments/assets/8fe7dfd5-7810-491d-92c0-d0b013c95bf3" />
 
 ## Installation
 
