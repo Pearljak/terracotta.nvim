@@ -1,26 +1,11 @@
 <div align="center">
-      <h1> <img src="blank" width="80px"><br/>terracotta.nvim</h1>
+      <h1> <img src="https://github.com/user-attachments/assets/aff692d3-04a0-4215-aa62-48ebcd7a3d8c" width="80px"><br/>terracotta.nvim</h1>
      </div>
-<p align="center">
-<a href="#"><img alt="Made with Lua" src="https://img.shields.io/badge/Made%20with%20Lua-blueviolet.svg?=for-the-badge&logo=lua" style="vertical-align:center" /></a>
+
 </p>
-
-
 Terracotta is a type of clay material that is brownish‑red or reddish‑orange in color and is made by firing clay at a relatively low temperature, crafted to feel intuitive and comfortable for your eyes.
-## Features
 
-- Full Treesitter support
-- LSP semantic highlighting
-- Popular plugin integrations:
-  - Telescope
-  - Nvim-tree
-  - Lualine
-  - nvim-cmp
-  - Gitsigns
-  - Bufferline
-  - Indent-blankline
-- Carefully crafted colors for better readability
-- Distinct visual modes
+<img width="1918" height="1060" alt="image" src="https://github.com/user-attachments/assets/8fe7dfd5-7810-491d-92c0-d0b013c95bf3" />
 
 ## Installation
 
@@ -111,8 +96,6 @@ vim.cmd([[colorscheme terracotta]])
 ### Full Configuration Options:
 > **Note:** Configuration is completely optional. The theme works perfectly without any setup.
 
-> **Note:** You can customize colors by modifying `lua/terracotta/palette.lua` or override specific highlights after loading the theme.
-
 ```lua
 require('terracotta').setup({
   styles = {
@@ -125,6 +108,7 @@ require('terracotta').setup({
   
   transparent = false,              -- default: solid background
   dim_inactive = true,              -- default: dim inactive windows
+  border_style = "rounded",
   
   plugins = {
     -- All enabled by default, set to false to disable
@@ -199,4 +183,5 @@ Contributions are welcome! Feel free to:
 ## License
 
 MIT License - see [LICENSE](LICENSE) file for details
+
 
