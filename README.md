@@ -6,9 +6,8 @@
 </h3>
 
 <p align="center">
-    <a href="https://github.com/Perljak/terracotta.nvim/stargazers"><img src="https://img.shields.io/github/stars/Perljak?colorA=D2691E&colorB=F5DEB3&logo=github&style=for-the-badge
-"></a>
-    <a href="https://github.com/catppuccin/nvim/issues"><img src="https://img.shields.io/badge/Follow_on_GitHub-Perljak-181717?style=for-the-badge&logo=github&logoColor=white"></a>
+    <a href="https://github.com/Perljak/terracotta.nvim/stargazers"><img src="https://img.shields.io/github/stars/Perljak?colorA=D2691E&colorB=F5DEB3&logo=github&style=for-the-badge"></a>
+    <a href="https://github.com/Perljak?tab=followers"><img src="https://img.shields.io/badge/Follow_on_GitHub-Perljak-181717?style=for-the-badge&logo=github&logoColor=white"></a>
 </p>
 
 A warm, earthy color scheme for Neovim inspired by terracotta pottery that is insightful and comfortable for the eyes.
