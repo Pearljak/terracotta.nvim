@@ -79,9 +79,7 @@ colorscheme terracotta
 vim.cmd([[colorscheme terracotta]])
 ```
 
-That's it! The theme works great out of the box.
-
-### Optional: Customize with Configuration
+### Optional:
 
 ```lua
 require('terracotta').setup({
