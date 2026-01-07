@@ -16,7 +16,7 @@ A warm, earthy color scheme for Neovim inspired by terracotta pottery that is in
 <img width="1118" height="611" alt="image" src="https://github.com/user-attachments/assets/1b129ae1-148b-49b3-b5c4-d9ebf8d323db" />
 <img width="1918" height="1060" alt="image" src="https://github.com/user-attachments/assets/8fe7dfd5-7810-491d-92c0-d0b013c95bf3" />
 
-
+<!-- panvimdoc-ignore-end -->
 
 ## Installation
 
