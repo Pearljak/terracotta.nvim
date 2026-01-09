@@ -6,7 +6,8 @@ M.colors = {
   wheat = "#F5DEB3",
   tan = "#DEB887",
   cream = "#FFE4C4",
-  
+
+  ot = "#7D7D8D", -- for @tag.css/@type.tag.css
   bg = "#1a1410",
   bg_light = "#2a2420",
   bg_lighter = "#3a3430",
