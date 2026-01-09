@@ -22,6 +22,7 @@ M.defaults = {
     gitsigns = true,
     bufferline = true,
     indent_blankline = true,
+	whichkey = true,
   },
 }
 

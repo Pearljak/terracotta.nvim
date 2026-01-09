@@ -12,6 +12,7 @@ function M.apply()
     "gitsigns",
     "bufferline",
     "indent_blankline",
+	"whichkey",
   }
   
   for _, plugin in ipairs(plugins) do
