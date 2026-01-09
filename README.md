@@ -6,8 +6,8 @@
 </h3>
 
 <p align="center">
-    <a href="https://github.com/Perljak/terracotta.nvim/stargazers"><img src="https://img.shields.io/github/stars/Perljak?colorA=D2691E&colorB=F5DEB3&logo=github&style=for-the-badge"></a>
-    <a href="https://github.com/Perljak?tab=followers"><img src="https://img.shields.io/badge/Follow_on_GitHub-Perljak-181717?style=for-the-badge&logo=github&logoColor=white"></a>
+    <a href="https://github.com/Pearljak/terracotta.nvim/stargazers"><img src="https://img.shields.io/github/stars/Pearljak?colorA=D2691E&colorB=F5DEB3&logo=github&style=for-the-badge"></a>
+    <a href="https://github.com/Pearljak?tab=followers"><img src="https://img.shields.io/badge/Follow_on_GitHub-Perljak-181717?style=for-the-badge&logo=github&logoColor=white"></a>
 </p>
 
 A warm, earthy color scheme for Neovim inspired by terracotta pottery that is insightful and comfortable for the eyes.
@@ -25,7 +25,7 @@ A warm, earthy color scheme for Neovim inspired by terracotta pottery that is in
 
 ```lua
 {
-  "Perljak/terracotta.nvim",
+  "Pearljak/terracotta.nvim",
   lazy = false,
   priority = 1000,
   config = function()
@@ -37,7 +37,7 @@ A warm, earthy color scheme for Neovim inspired by terracotta pottery that is in
 **With customization:**
 ```lua
 {
-  "Perljak/terracotta.nvim",
+  "Pearljak/terracotta.nvim",
   lazy = false,
   priority = 1000,
   config = function()
@@ -56,7 +56,7 @@ A warm, earthy color scheme for Neovim inspired by terracotta pottery that is in
 
 ```lua
 use {
-  "Perljak/terracotta.nvim",
+  "Pearljak/terracotta.nvim",
   config = function()
     -- Optional: configure before loading
     -- require('terracotta').setup({ ... })
@@ -68,7 +68,7 @@ use {
 ### Using [vim-plug](https://github.com/junegunn/vim-plug)
 
 ```vim
-Plug 'Perljak/terracotta.nvim'
+Plug 'Pearljak/terracotta.nvim'
 ```
 
 Then in your `init.lua`:
