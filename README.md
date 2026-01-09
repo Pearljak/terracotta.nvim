@@ -43,7 +43,8 @@ A warm, earthy color scheme for Neovim inspired by terracotta pottery that is in
   config = function()
     require('terracotta').setup({
       styles = {
-        functions = { bold = true, italic = true },
+        strings = { italic = true },
+        keywords = { bold = true },
       }
     })
     vim.cmd([[colorscheme terracotta]])
