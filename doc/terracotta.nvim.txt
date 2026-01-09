@@ -1,4 +1,4 @@
-*terracotta.nvim.txt*       For NVIM v0.8.0       Last change: 2026 January 07
+*terracotta.nvim.txt*       For NVIM v0.8.0       Last change: 2026 January 09
 
 ==============================================================================
 Table of Contents                          *terracotta.nvim-table-of-contents*
@@ -33,7 +33,8 @@ USING LAZY.NVIM ~
       config = function()
         require('terracotta').setup({
           styles = {
-            functions = { bold = true, italic = true },
+            strings = { italic = true },
+            keywords = { bold = true },
           }
         })
         vim.cmd([[colorscheme terracotta]])
