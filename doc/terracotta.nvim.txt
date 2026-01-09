@@ -14,7 +14,7 @@ USING LAZY.NVIM ~
 
 >lua
     {
-      "Perljak/terracotta.nvim",
+      "Pearljak/terracotta.nvim",
       lazy = false,
       priority = 1000,
       config = function()
@@ -27,7 +27,7 @@ USING LAZY.NVIM ~
 
 >lua
     {
-      "Perljak/terracotta.nvim",
+      "Pearljak/terracotta.nvim",
       lazy = false,
       priority = 1000,
       config = function()
@@ -47,7 +47,7 @@ USING PACKER.NVIM ~
 
 >lua
     use {
-      "Perljak/terracotta.nvim",
+      "Pearljak/terracotta.nvim",
       config = function()
         -- Optional: configure before loading
         -- require('terracotta').setup({ ... })
@@ -60,7 +60,7 @@ USING PACKER.NVIM ~
 USING VIM-PLUG ~
 
 >vim
-    Plug 'Perljak/terracotta.nvim'
+    Plug 'Pearljak/terracotta.nvim'
 <
 
 Then in your `init.lua`:
