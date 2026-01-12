@@ -3,7 +3,7 @@ local c = palette.colors
 local tbl_extend = vim.tbl_extend
 
 local M = {}
-
+-- rcommit msg
 -- Helper function to reduce duplication
 local function extend_style(base_fg, style_key, config)
     return tbl_extend("force", { fg = base_fg }, config.styles[style_key])
