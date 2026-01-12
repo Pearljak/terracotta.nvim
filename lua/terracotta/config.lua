@@ -3,16 +3,16 @@ local M = {}
 M.defaults = {
   styles = {
     comments = { italic = true },
-    functions = {},
+    functions = { bold = true },
     keywords = {},
     variables = {},
-    strings = {},
+    strings = { italic = true },
   },
-  
+
   transparent = false,
   dim_inactive = true,
   border_style = "rounded",
-  
+
   plugins = {
     telescope = true,
     nvimtree = true,
