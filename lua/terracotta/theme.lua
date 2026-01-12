@@ -1,189 +1,245 @@
 local palette = require("terracotta.palette")
 local c = palette.colors
+local tbl_extend = vim.tbl_extend
 
 local M = {}
 
+-- Helper function to reduce duplication
+local function extend_style(base_fg, style_key, config)
+    return tbl_extend("force", { fg = base_fg }, config.styles[style_key])
+end
+
 function M.setup()
-  local config = require("terracotta.config").get()
-  local theme = {}
+    local config = require("terracotta.config").get()
+    local theme = {}
 
-  -- testing 
-  local border = config.border_style == "rounded" and "rounded" or "single"
-  theme.FloatBorder = { fg = c.brown_med }
+    -- Border configuration
+    local border = config.border_style == "rounded" and "rounded" or "single"
+    theme.FloatBorder = { fg = c.brown_med }
 
-  theme.Normal = { fg = c.fg, bg = c.bg }
-  theme.NormalFloat = { fg = c.fg, bg = c.bg_light }
-  theme.NormalNC = { fg = c.fg_dim, bg = c.bg }
+    -- Normal modes
+    theme.Normal = { fg = c.fg, bg = c.bg }
+    theme.NormalFloat = { fg = c.fg, bg = c.bg_light }
+    theme.NormalNC = config.dim_inactive and { fg = c.fg_dim, bg = c.bg } or { fg = c.fg, bg = c.bg }
 
-  if config.dim_inactive then
-    theme.NormalNC = { fg = c.fg_dim, bg = c.bg }
-  end
+    -- Syntax groups organized by category
+    local syntax_groups = {
+        -- Comments
+        Comment = extend_style(c.gray, "comments", config),
+        SpecialComment = { fg = c.gray_light, italic = true },
 
-  theme.Comment = vim.tbl_extend("force", { fg = c.gray }, config.styles.comments)
-  theme.Constant = { fg = c.orange }
-  theme.String = vim.tbl_extend("force", { fg = c.green }, config.styles.strings)
-  theme.Character = { fg = c.green }
-  theme.Number = { fg = c.orange }
-  theme.Boolean = { fg = c.orange }
-  theme.Float = { fg = c.orange }
+        -- Constants
+        Constant = { fg = c.orange },
+        String = extend_style(c.green, "strings", config),
+        Character = { fg = c.green },
+        Number = { fg = c.orange },
+        Boolean = { fg = c.orange },
+        Float = { fg = c.orange },
 
-  theme.Identifier = vim.tbl_extend("force", { fg = c.fg }, config.styles.variables)
-  theme.Function = vim.tbl_extend("force", { fg = c.brown_med, bold = true }, config.styles.functions)
+        -- Identifiers and functions
+        Identifier = extend_style(c.fg, "variables", config),
+        Function = extend_style(c.brown_med, "functions", config),
 
-  theme.Statement = vim.tbl_extend("force", { fg = c.purple }, config.styles.keywords)
-  theme.Conditional = vim.tbl_extend("force", { fg = c.purple }, config.styles.keywords)
-  theme.Repeat = vim.tbl_extend("force", { fg = c.purple }, config.styles.keywords)
-  theme.Label = vim.tbl_extend("force", { fg = c.purple }, config.styles.keywords)
-  theme.Operator = { fg = c.fg_dim }
-  theme.Keyword = vim.tbl_extend("force", { fg = c.purple }, config.styles.keywords)
-  theme.Exception = { fg = c.red }
+        -- Statements and keywords
+        Statement = extend_style(c.purple, "keywords", config),
+        Conditional = extend_style(c.purple, "keywords", config),
+        Repeat = extend_style(c.purple, "keywords", config),
+        Label = extend_style(c.purple, "keywords", config),
+        Keyword = extend_style(c.purple, "keywords", config),
+        Operator = { fg = c.fg_dim },
+        Exception = { fg = c.red },
 
-  theme.PreProc = { fg = c.cyan }
-  theme.Include = { fg = c.purple }
-  theme.Define = { fg = c.purple }
-  theme.Macro = { fg = c.cyan }
-  theme.PreCondit = { fg = c.cyan }
+        -- Preprocessor
+        PreProc = { fg = c.cyan },
+        Include = { fg = c.purple },
+        Define = { fg = c.purple },
+        Macro = { fg = c.cyan },
+        PreCondit = { fg = c.cyan },
 
-  theme.Type = { fg = c.yellow }
-  theme.StorageClass = { fg = c.purple }
-  theme.Structure = { fg = c.yellow }
-  theme.Typedef = { fg = c.yellow }
+        -- Types
+        Type = { fg = c.yellow },
+        StorageClass = { fg = c.purple },
+        Structure = { fg = c.yellow },
+        Typedef = { fg = c.yellow },
 
-  theme.Special = { fg = c.blue }
-  theme.SpecialChar = { fg = c.orange }
-  theme.Tag = { fg = c.brown_med }
-  theme.Delimiter = { fg = c.fg_dim }
-  theme.SpecialComment = { fg = c.gray_light, italic = true }
-  theme.Debug = { fg = c.red }
+        -- Special
+        Special = { fg = c.blue },
+        SpecialChar = { fg = c.orange },
+        Tag = { fg = c.brown_med },
+        Delimiter = { fg = c.fg_dim },
+        Debug = { fg = c.red },
 
-  theme.Underlined = { underline = true }
-  theme.Ignore = { fg = c.gray }
-  theme.Error = { fg = c.red, bold = true }
-  theme.Todo = { fg = c.bg, bg = c.yellow, bold = true }
+        -- Text
+        Underlined = { underline = true },
+        Ignore = { fg = c.gray },
+        Error = { fg = c.red, bold = true },
+        Todo = { fg = c.bg, bg = c.yellow, bold = true },
+    }
 
-  theme.Cursor = { fg = c.bg, bg = c.fg }
-  theme.CursorLine = { bg = c.bg_light }
-  theme.CursorColumn = { bg = c.bg_light }
-  theme.ColorColumn = { bg = c.bg_light }
-  theme.CursorLineNr = { fg = c.brown_med, bold = true }
-  theme.LineNr = { fg = c.gray }
-  theme.SignColumn = { bg = c.bg }
-  theme.FoldColumn = { fg = c.gray, bg = c.bg }
-  theme.Folded = { fg = c.gray, bg = c.bg_light }
+    -- Apply syntax groups to theme
+    for group, value in pairs(syntax_groups) do
+        theme[group] = value
+    end
 
-  theme.Visual = { bg = c.bg_lighter }
-  theme.VisualNOS = { bg = c.bg_lighter }
-  theme.Search = { fg = c.bg, bg = c.yellow }
-  theme.IncSearch = { fg = c.bg, bg = c.orange }
-  theme.CurSearch = { fg = c.bg, bg = c.orange }
+    -- Cursor and line numbers
+    theme.Cursor = { fg = c.bg, bg = c.fg }
+    theme.CursorLine = { bg = c.bg_light }
+    theme.CursorColumn = { bg = c.bg_light }
+    theme.ColorColumn = { bg = c.bg_light }
+    theme.CursorLineNr = { fg = c.brown_med, bold = true }
+    theme.LineNr = { fg = c.gray }
 
-  theme.Pmenu = { fg = c.fg, bg = c.bg_light }
-  theme.PmenuSel = { fg = c.bg, bg = c.brown_med }
-  theme.PmenuSbar = { bg = c.bg_lighter }
-  theme.PmenuThumb = { bg = c.brown_dark }
+    -- Columns
+    theme.SignColumn = { bg = c.bg }
+    theme.FoldColumn = { fg = c.gray, bg = c.bg }
+    theme.Folded = { fg = c.gray, bg = c.bg_light }
 
-  theme.StatusLine = { fg = c.fg, bg = c.bg_light }
-  theme.StatusLineNC = { fg = c.gray, bg = c.bg_light }
-  theme.TabLine = { fg = c.gray, bg = c.bg_light }
-  theme.TabLineFill = { bg = c.bg_light }
-  theme.TabLineSel = { fg = c.fg, bg = c.bg }
+    -- Visual modes and search
+    local visual_bg = c.bg_lighter
+    theme.Visual = { bg = visual_bg }
+    theme.VisualNOS = { bg = visual_bg }
+    theme.Search = { fg = c.bg, bg = c.yellow }
+    theme.IncSearch = { fg = c.bg, bg = c.orange }
+    theme.CurSearch = { fg = c.bg, bg = c.orange }
 
-  theme.VertSplit = { fg = c.bg_lighter }
-  theme.WinSeparator = { fg = c.bg_lighter }
+    -- Popup menu
+    theme.Pmenu = { fg = c.fg, bg = c.bg_light }
+    theme.PmenuSel = { fg = c.bg, bg = c.brown_med }
+    theme.PmenuSbar = { bg = c.bg_lighter }
+    theme.PmenuThumb = { bg = c.brown_dark }
 
-  theme.WildMenu = { fg = c.bg, bg = c.brown_med }
-  theme.Directory = { fg = c.blue }
-  theme.Title = { fg = c.brown_med, bold = true }
-  theme.MoreMsg = { fg = c.green }
-  theme.ModeMsg = { fg = c.green, bold = true }
-  theme.Question = { fg = c.blue }
-  theme.WarningMsg = { fg = c.yellow }
-  theme.ErrorMsg = { fg = c.red }
+    -- Status and tab lines
+    theme.StatusLine = { fg = c.fg, bg = c.bg_light }
+    theme.StatusLineNC = { fg = c.gray, bg = c.bg_light }
+    theme.TabLine = { fg = c.gray, bg = c.bg_light }
+    theme.TabLineFill = { bg = c.bg_light }
+    theme.TabLineSel = { fg = c.fg, bg = c.bg }
 
-  theme.MatchParen = { fg = c.orange, bold = true }
-  theme.NonText = { fg = c.gray }
-  theme.SpecialKey = { fg = c.gray }
-  theme.Whitespace = { fg = c.gray }
+    -- UI elements
+    theme.VertSplit = { fg = c.bg_lighter }
+    theme.WinSeparator = { fg = c.bg_lighter }
+    theme.WildMenu = { fg = c.bg, bg = c.brown_med }
+    theme.Directory = { fg = c.blue }
+    theme.Title = { fg = c.brown_med, bold = true }
+    theme.MoreMsg = { fg = c.green }
+    theme.ModeMsg = { fg = c.green, bold = true }
+    theme.Question = { fg = c.blue }
+    theme.WarningMsg = { fg = c.yellow }
+    theme.ErrorMsg = { fg = c.red }
 
-  theme.DiffAdd = { fg = c.green, bg = palette.darken(c.green, 0.8) }
-  theme.DiffChange = { fg = c.blue, bg = palette.darken(c.blue, 0.8) }
-  theme.DiffDelete = { fg = c.red, bg = palette.darken(c.red, 0.8) }
-  theme.DiffText = { fg = c.yellow, bg = palette.darken(c.yellow, 0.7) }
+    -- Text highlighting
+    theme.MatchParen = { fg = c.orange, bold = true }
+    theme.NonText = { fg = c.gray }
+    theme.SpecialKey = { fg = c.gray }
+    theme.Whitespace = { fg = c.gray }
 
-  theme.SpellBad = { sp = c.red, undercurl = true }
-  theme.SpellCap = { sp = c.blue, undercurl = true }
-  theme.SpellLocal = { sp = c.cyan, undercurl = true }
-  theme.SpellRare = { sp = c.purple, undercurl = true }
+    -- Diff
+    local darken = palette.darken
+    theme.DiffAdd = { fg = c.green, bg = darken(c.green, 0.8) }
+    theme.DiffChange = { fg = c.blue, bg = darken(c.blue, 0.8) }
+    theme.DiffDelete = { fg = c.red, bg = darken(c.red, 0.8) }
+    theme.DiffText = { fg = c.yellow, bg = darken(c.yellow, 0.7) }
 
-  theme.DiagnosticError = { fg = c.red }
-  theme.DiagnosticWarn = { fg = c.yellow }
-  theme.DiagnosticInfo = { fg = c.blue }
-  theme.DiagnosticHint = { fg = c.cyan }
-  theme.DiagnosticUnderlineError = { sp = c.red, undercurl = true }
-  theme.DiagnosticUnderlineWarn = { sp = c.yellow, undercurl = true }
-  theme.DiagnosticUnderlineInfo = { sp = c.blue, undercurl = true }
-  theme.DiagnosticUnderlineHint = { sp = c.cyan, undercurl = true }
+    -- Spell checking
+    local undercurl = { undercurl = true }
+    theme.SpellBad = tbl_extend("force", { sp = c.red }, undercurl)
+    theme.SpellCap = tbl_extend("force", { sp = c.blue }, undercurl)
+    theme.SpellLocal = tbl_extend("force", { sp = c.cyan }, undercurl)
+    theme.SpellRare = tbl_extend("force", { sp = c.purple }, undercurl)
 
-  theme["@variable"] = vim.tbl_extend("force", { fg = c.fg }, config.styles.variables)
-  theme["@variable.builtin"] = { fg = c.orange }
-  theme["@variable.parameter"] = { fg = c.fg_dim }
-  theme["@variable.member"] = vim.tbl_extend("force", { fg = c.fg }, config.styles.variables)
+    -- Diagnostics
+    theme.DiagnosticError = { fg = c.red }
+    theme.DiagnosticWarn = { fg = c.yellow }
+    theme.DiagnosticInfo = { fg = c.blue }
+    theme.DiagnosticHint = { fg = c.cyan }
 
-  theme["@constant"] = { fg = c.orange }
-  theme["@constant.builtin"] = { fg = c.orange }
-  theme["@constant.macro"] = { fg = c.cyan }
+    local diagnostic_undercurl = { undercurl = true }
+    theme.DiagnosticUnderlineError = tbl_extend("force", { sp = c.red }, diagnostic_undercurl)
+    theme.DiagnosticUnderlineWarn = tbl_extend("force", { sp = c.yellow }, diagnostic_undercurl)
+    theme.DiagnosticUnderlineInfo = tbl_extend("force", { sp = c.blue }, diagnostic_undercurl)
+    theme.DiagnosticUnderlineHint = tbl_extend("force", { sp = c.cyan }, diagnostic_undercurl)
 
-  theme["@module"] = { fg = c.cyan }
-  theme["@label"] = { fg = c.purple }
+    -- Treesitter groups (organized by type)
+    local treesitter = {
+        -- Variables
+        ["@variable"] = extend_style(c.fg, "variables", config),
+        ["@variable.builtin"] = { fg = c.orange },
+        ["@variable.parameter"] = { fg = c.fg_dim },
+        ["@variable.member"] = extend_style(c.fg, "variables", config),
 
-  theme["@string"] = vim.tbl_extend("force", { fg = c.green }, config.styles.strings)
-  theme["@string.regex"] = { fg = c.orange }
-  theme["@string.escape"] = { fg = c.orange }
+        -- Constants
+        ["@constant"] = { fg = c.orange },
+        ["@constant.builtin"] = { fg = c.orange },
+        ["@constant.macro"] = { fg = c.cyan },
 
-  theme["@character"] = { fg = c.green }
-  theme["@number"] = { fg = c.orange }
-  theme["@boolean"] = { fg = c.orange }
-  theme["@float"] = { fg = c.orange }
+        -- Modules and labels
+        ["@module"] = { fg = c.cyan },
+        ["@label"] = { fg = c.purple },
 
-  theme["@function"] = vim.tbl_extend("force", { fg = c.brown_med, bold = true }, config.styles.functions)
-  theme["@function.builtin"] = vim.tbl_extend("force", { fg = c.brown_med, bold = true }, config.styles.functions)
-  theme["@function.macro"] = { fg = c.cyan }
-  theme["@function.method"] = vim.tbl_extend("force", { fg = c.brown_med, bold = true }, config.styles.functions)
+        -- Strings
+        ["@string"] = extend_style(c.green, "strings", config),
+        ["@string.regex"] = { fg = c.orange },
+        ["@string.escape"] = { fg = c.orange },
+        ["@character"] = { fg = c.green },
 
-  theme["@constructor"] = { fg = c.yellow }
-  theme["@operator"] = { fg = c.fg_dim }
+        -- Numbers
+        ["@number"] = { fg = c.orange },
+        ["@boolean"] = { fg = c.orange },
+        ["@float"] = { fg = c.orange },
 
-  theme["@keyword"] = vim.tbl_extend("force", { fg = c.purple }, config.styles.keywords)
-  theme["@keyword.function"] = vim.tbl_extend("force", { fg = c.purple }, config.styles.keywords)
-  theme["@keyword.operator"] = vim.tbl_extend("force", { fg = c.purple }, config.styles.keywords)
-  theme["@keyword.return"] = vim.tbl_extend("force", { fg = c.purple }, config.styles.keywords)
+        -- Functions
+        ["@function"] = extend_style(c.brown_med, "functions", config),
+        ["@function.builtin"] = extend_style(c.brown_med, "functions", config),
+        ["@function.macro"] = { fg = c.cyan },
+        ["@function.method"] = extend_style(c.brown_med, "functions", config),
 
-  theme["@conditional"] = vim.tbl_extend("force", { fg = c.purple }, config.styles.keywords)
-  theme["@repeat"] = vim.tbl_extend("force", { fg = c.purple }, config.styles.keywords)
-  theme["@exception"] = { fg = c.red }
+        -- Constructors and operators
+        ["@constructor"] = { fg = c.yellow },
+        ["@operator"] = { fg = c.fg_dim },
 
+<<<<<<< HEAD
   theme["@type.tag.css"] = { fg = c.ot } -- this for @type
   theme["@type"] = { fg = c.yellow }
   theme["@type.builtin"] = { fg = c.yellow }
   theme["@type.qualifier"] = { fg = c.purple }
+=======
+        -- Keywords
+        ["@keyword"] = extend_style(c.purple, "keywords", config),
+        ["@keyword.function"] = extend_style(c.purple, "keywords", config),
+        ["@keyword.operator"] = extend_style(c.purple, "keywords", config),
+        ["@keyword.return"] = extend_style(c.purple, "keywords", config),
+        ["@conditional"] = extend_style(c.purple, "keywords", config),
+        ["@repeat"] = extend_style(c.purple, "keywords", config),
+        ["@exception"] = { fg = c.red },
+>>>>>>> 227866dafb9209376fd61d712cd504353e2d777d
 
-  theme["@attribute"] = { fg = c.cyan }
-  theme["@property"] = { fg = c.fg }
+        -- Types
+        ["@type.tag.css"] = { fg = c.ot },
+        ["@type"] = { fg = c.yellow },
+        ["@type.builtin"] = { fg = c.yellow },
+        ["@type.qualifier"] = { fg = c.purple },
 
+        -- Properties and attributes
+        ["@attribute"] = { fg = c.cyan },
+        ["@property"] = { fg = c.fg },
 
-  -- @type.css links to @type   priority: 100   language: css
-  -- @attribute.css links to @attribute   priority: 100   language: css
-  -- @property.class.css links to @property   priority: 100   language: css
-  theme["@tag.css"] = { fg = c.ot, bold = true, italic = true }
-  theme["@attribute.css"] = { fg = c.ot, bold = true } --  and this for @attribute.css
-  theme["@property.class.css"] = {}
+        -- CSS specific
+        ["@tag.css"] = { fg = c.ot, bold = true, italic = true },
+        ["@attribute.css"] = { fg = c.ot, bold = true },
+        ["@property.class.css"] = {},
 
+        -- Tags
+        ["@tag"] = { fg = c.brown_med },
+        ["@tag.attribute"] = { fg = c.fg_dim },
+        ["@tag.delimiter"] = { fg = c.gray },
+    }
 
-  theme["@tag"] = { fg = c.brown_med }
-  theme["@tag.attribute"] = { fg = c.fg_dim }
-  theme["@tag.delimiter"] = { fg = c.gray }
+    -- Apply treesitter groups
+    for group, value in pairs(treesitter) do
+        theme[group] = value
+    end
 
-  return theme
+    return theme
 end
 
 return M
