@@ -162,7 +162,7 @@ function M.setup()
   theme["@repeat"] = vim.tbl_extend("force", { fg = c.purple }, config.styles.keywords)
   theme["@exception"] = { fg = c.red }
 
-  theme["@type.tag.css"] = { fg = c.ot } -- this for @type.css
+  theme["@type.tag.css"] = { fg = c.ot } -- this for @type
   theme["@type"] = { fg = c.yellow }
   theme["@type.builtin"] = { fg = c.yellow }
   theme["@type.qualifier"] = { fg = c.purple }
