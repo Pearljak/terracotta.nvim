@@ -197,12 +197,6 @@ function M.setup()
         ["@constructor"] = { fg = c.yellow },
         ["@operator"] = { fg = c.fg_dim },
 
-<<<<<<< HEAD
-  theme["@type.tag.css"] = { fg = c.ot } -- this for @type
-  theme["@type"] = { fg = c.yellow }
-  theme["@type.builtin"] = { fg = c.yellow }
-  theme["@type.qualifier"] = { fg = c.purple }
-=======
         -- Keywords
         ["@keyword"] = extend_style(c.purple, "keywords", config),
         ["@keyword.function"] = extend_style(c.purple, "keywords", config),
@@ -211,7 +205,6 @@ function M.setup()
         ["@conditional"] = extend_style(c.purple, "keywords", config),
         ["@repeat"] = extend_style(c.purple, "keywords", config),
         ["@exception"] = { fg = c.red },
->>>>>>> 227866dafb9209376fd61d712cd504353e2d777d
 
         -- Types
         ["@type.tag.css"] = { fg = c.ot },
