@@ -85,7 +85,7 @@ function M.setup()
     theme.Folded = { fg = c.gray, bg = c.bg_light }
 
     local visual_bg = c.bg_lighter
-    theme.Visual = { bg = visual_bg }
+    theme.Visual = { bg = visual_bg, bold = true }
     theme.VisualNOS = { bg = visual_bg }
     theme.Search = { fg = c.bg, bg = c.yellow }
     theme.IncSearch = { fg = c.bg, bg = c.orange }
@@ -96,7 +96,7 @@ function M.setup()
     theme.PmenuSbar = { bg = c.bg_lighter }
     theme.PmenuThumb = { bg = c.brown_dark }
 
-    theme.StatusLine = { fg = c.fg, bg = c.bg_light }
+    theme.StatusLine = { fg = c.fg, bg = c.bg_light, bold = true }
     theme.StatusLineNC = { fg = c.gray, bg = c.bg_light }
     theme.TabLine = { fg = c.gray, bg = c.bg_light }
     theme.TabLineFill = { bg = c.bg_light }
